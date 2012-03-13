@@ -41,7 +41,7 @@ case "$1" in
   stop)
     echo "Stopping $DESC"
     if ps fauwx | grep org.apache.jmeter.NewDriver | grep -v vi | grep -v grep | awk {'print $2'} | xargs kill; then
-       echo "$DESC stopped"
+      echo "$DESC stopped"
       exit 0
     else
       exit 1
@@ -50,6 +50,14 @@ case "$1" in
   restart)
     $0 stop
     $0 start
+    ;;
+  status)
+    if ps fauwx | grep org.apache.jmeter.NewDriver | grep -v vi | grep -v grep; then
+      echo "$DESC running"
+      exit 0
+    else
+      exit 1
+    fi
     ;;
   *)
     echo "Usage: $0 {start|stop|restart}"
