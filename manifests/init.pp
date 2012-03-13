@@ -10,10 +10,10 @@ class jmeter {
     mode    => 755,
     source  => "puppet:///modules/jmeter/jmeter-server",
     require => Package["jmeter"],
-    notify  => Service["jmeter"],
+    notify  => Service["jmeter-server"],
   }
 
-  service{ "jmeter":
+  service{ "jmeter-server":
     enable  => true,
     ensure  => running,
     require => Package["jmeter"],
